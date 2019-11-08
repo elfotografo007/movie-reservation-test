@@ -6,6 +6,7 @@ ruby "2.6.3"
 git_source(:github) {|repo_name| "https://github.com/#{repo_name}" }
 
 gem 'sequel', '~> 5.26'
+gem 'pg', '~> 1.1', '>= 1.1.4'
 
 group :development, :test do
     gem 'byebug', '~> 11.0', '>= 11.0.1'

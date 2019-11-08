@@ -13,7 +13,12 @@ RSpec.configure do |config|
 
   config.order = :random
   config.include FactoryBot::Syntax::Methods
+  
   config.before(:suite) do
     FactoryBot.find_definitions
+  end
+
+  config.around(:each) do |example|
+    DB.transaction(rollback: :always, auto_savepoint: true){ example.run }
   end
 end
