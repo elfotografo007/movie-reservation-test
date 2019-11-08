@@ -12,5 +12,11 @@ class Reservation < Sequel::Model(:reservations)
         unless (1..10).include?(n_seats)
             errors.add(:n_seats, 'Must be between 1 and 10')
         end
+
+        errors.add(:movie, 'is full') if movie.full?(date)
+
+        unless movie.presenting?(date)
+            errors.add(:movie, 'is not presenting on the desired date')
+        end 
     end
 end

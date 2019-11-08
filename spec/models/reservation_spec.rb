@@ -20,8 +20,8 @@ RSpec.describe Reservation do
     end
 
     it 'creates a reservation' do
-        movie = create(:movie)
-        date = Date.today
+        movie = create(:movie, monday: true)
+        date = Date.new(2019, 11, 4)
         reservee = Faker::Name.name
         email = Faker::Internet.email
         r = Reservation.create(movie: movie, date: date, reservee: reservee,
@@ -44,15 +44,31 @@ RSpec.describe Reservation do
         expect(r).not_to be_valid
     end
 
+    it 'cannot allocate more than the movie capacity' do
+        r = create(:reservation, n_seats: 10, date: Date.new(2019, 11, 6),
+                   movie: create(:movie, wednesday: true))
+        r2 = build(:reservation, movie: r.movie, n_seats: 1)
+        expect(r2).not_to be_valid
+    end
+
+    it 'cannot create if the movie is not presented that day' do
+        movie = create(:movie, monday: true)
+        r = build(:reservation, movie: movie, n_seats: 1,
+                   date: Date.new(2019, 11, 8))
+        expect(r).not_to be_valid
+    end
+
     context 'list' do
         it 'for a given date range' do
-            today = Date.today
+            today = Date.new(2019, 11, 8)
             tomorrow = today.next_day
             yesterday = today.prev_day
-            r1 = create(:reservation, date: yesterday)
-            r2 = create(:reservation, date: today)
-            r3 = create(:reservation, date: tomorrow)
-            r4 = create(:reservation, date: today.next_month)
+            movie = create(:movie, thursday: true, friday: true, 
+                            saturday: true, sunday: true)
+            r1 = create(:reservation, date: yesterday, movie: movie)
+            r2 = create(:reservation, date: today, movie: movie)
+            r3 = create(:reservation, date: tomorrow, movie: movie)
+            r4 = create(:reservation, date: today.next_month, movie: movie)
             reservations = Reservation.by_date_range(yesterday, tomorrow)
             expect(reservations.to_a).to eq([r1, r2, r3])
             expect(reservations).not_to include(r4)

@@ -43,6 +43,18 @@ RSpec.describe Movie do
         expect(Movie.new).to respond_to(:reservations)
     end
 
+    it 'calculates if it is full' do
+        movie = create(:movie, friday: true)
+        r = create(:reservation, movie: movie, n_seats: 10, 
+                   date: Date.new(2019, 11, 8))
+        expect(movie.full?(r.date)).to be_truthy
+    end
+
+    it 'calculates if it is presenting in a day' do
+        movie = create(:movie, tuesday: true)
+        expect(movie.presenting?(Date.new(2019, 11, 5))).to be_truthy
+    end
+
     it 'creates a movie' do
         name = 'My name'
         description = 'My description'
