@@ -1,4 +1,5 @@
 class Movie < Sequel::Model(:movies)
+    one_to_many :reservations
     DAYS = [:monday, :tuesday, :wednesday, :thursday, :friday, :saturday,
             :sunday]
     dataset_module do

@@ -39,6 +39,10 @@ RSpec.describe Movie do
         expect(Movie.new).to respond_to(:sunday)
     end
 
+    it 'responds to reservations' do
+        expect(Movie.new).to respond_to(:reservations)
+    end
+
     it 'creates a movie' do
         name = 'My name'
         description = 'My description'
