@@ -25,10 +25,18 @@ connection string:
 export MV_DATABASE_URL="postgres://user:password@host:port/database_name"
 ```
 
-# TODO add how to run migrations
+Run the migrations:
+```
+sequel -m config/migrations/ $MV_DATABASE_URL
+```
 
 ## Deployment
 
 Set the following environment variables:
 MV_ENV=production
 MV_DATABASE_URL="postgres://user:password@host:port/database_name"
+
+Don't forget to run the migrations:
+```
+heroku run sequel -m config/migrations/ $MV_DATABASE_URL
+```

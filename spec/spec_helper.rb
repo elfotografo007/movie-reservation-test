@@ -1,5 +1,7 @@
 Bundler.require(:default, :test)
 
+require_relative '../config/application'
+
 RSpec.configure do |config|
   config.expect_with :rspec do |expectations|
     expectations.include_chain_clauses_in_custom_matcher_descriptions = true
@@ -13,7 +15,7 @@ RSpec.configure do |config|
 
   config.order = :random
   config.include FactoryBot::Syntax::Methods
-  
+
   config.before(:suite) do
     FactoryBot.find_definitions
   end
