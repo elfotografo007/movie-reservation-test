@@ -11,4 +11,5 @@ group :development, :test do
     gem 'byebug', '~> 11.0', '>= 11.0.1'
     gem 'rspec', '~> 3.9'
     gem 'faker', '~> 2.7'
+    gem 'factory_bot', '~> 5.1', '>= 5.1.1'
 end
