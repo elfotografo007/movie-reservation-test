@@ -24,5 +24,6 @@ class Movie < Sequel::Model(:movies)
         super
         errors.add(:name, "can't be blank") if name.blank?
         errors.add(:description, "can't be blank") if description.blank?
+        errors.add(:url, "can't be blank") if url.blank?
     end
 end
