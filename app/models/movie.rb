@@ -19,4 +19,10 @@ class Movie < Sequel::Model(:movies)
         day_of_week = date.strftime("%A").downcase
         self.send(day_of_week)
     end
+
+    def validate
+        super
+        errors.add(:name, "can't be blank") if name.blank?
+        errors.add(:description, "can't be blank") if description.blank?
+    end
 end

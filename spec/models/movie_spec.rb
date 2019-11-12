@@ -43,6 +43,18 @@ RSpec.describe Movie do
         expect(Movie.new).to respond_to(:reservations)
     end
 
+    it 'is not valid without a name' do
+        movie = Movie.new(description: 'My desc')
+        expect(movie).not_to be_valid
+        expect(movie.errors).to include(:name)
+    end
+
+    it 'is not valid without a description' do
+        movie = Movie.new(name: 'My name')
+        expect(movie).not_to be_valid
+        expect(movie.errors).to include(:description)
+    end
+
     it 'calculates if it is full' do
         movie = create(:movie, friday: true)
         r = create(:reservation, movie: movie, n_seats: 10, 
