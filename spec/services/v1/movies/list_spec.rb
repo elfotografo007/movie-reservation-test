@@ -1,4 +1,4 @@
-RSpec.describe V1::Movies::List, focus: true do
+RSpec.describe V1::Movies::List do
     subject { V1::Movies::List.new }
     it 'list movies correctly' do
         movie1 = create(:movie, tuesday: true)
