@@ -24,7 +24,5 @@ class Reservation < Sequel::Model(:reservations)
         else
             errors.add(:movie, "can't be blank")
         end
-
-        
     end
 end
