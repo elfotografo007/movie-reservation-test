@@ -1,5 +1,5 @@
-RSpec.describe V1::Reservations::List do
-    subject { V1::Reservations::List.new }
+RSpec.describe Services::V1::Reservations::List do
+    subject { Services::V1::Reservations::List.new }
     it 'lists reservations correctly' do
         today = Date.new(2019, 11, 8)
         tomorrow = today.next_day

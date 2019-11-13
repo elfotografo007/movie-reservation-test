@@ -47,7 +47,8 @@ RSpec.describe Reservation do
     it 'cannot allocate more than the movie capacity' do
         r = create(:reservation, n_seats: 10, date: Date.new(2019, 11, 6),
                    movie: create(:movie, wednesday: true))
-        r2 = build(:reservation, movie: r.movie, n_seats: 1)
+        r2 = build(:reservation, movie: r.movie, n_seats: 1,
+                    date: Date.new(2019, 11, 6))
         expect(r2).not_to be_valid
     end
 

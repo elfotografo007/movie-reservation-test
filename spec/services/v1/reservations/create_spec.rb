@@ -1,5 +1,5 @@
-RSpec.describe V1::Reservations::Create do
-    subject { V1::Reservations::Create.new }
+RSpec.describe Services::V1::Reservations::Create do
+    subject { Services::V1::Reservations::Create.new }
     it 'creates a reservation correctly' do
         movie = create(:movie, monday: true)
         date = Date.new(2019, 11, 4)

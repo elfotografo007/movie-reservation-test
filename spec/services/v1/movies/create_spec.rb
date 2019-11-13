@@ -1,5 +1,5 @@
-RSpec.describe V1::Movies::Create do
-    subject { V1::Movies::Create.new }
+RSpec.describe Services::V1::Movies::Create do
+    subject { Services::V1::Movies::Create.new }
     it 'creates movie correctly' do
         movie1 = build(:movie, tuesday: true)
         result = subject.call(movie1.to_hash).value!
