@@ -58,6 +58,29 @@ RSpec.describe Reservation do
         expect(r).not_to be_valid
     end
 
+    it 'validates movie presence' do
+        r = build(:reservation, movie: nil, n_seats: 1,
+                   date: Date.new(2019, 11, 8))
+        expect(r).not_to be_valid
+        expect(r.errors).to include(:movie)
+    end
+
+    it 'validates date presence' do
+        movie = create(:movie, monday: true)
+        r = build(:reservation, movie: movie, n_seats: 1,
+                   date: nil)
+        expect(r).not_to be_valid
+        expect(r.errors).to include(:date)
+    end
+
+    it 'validates reservee presence' do
+        movie = create(:movie, monday: true)
+        r = build(:reservation, movie: movie, n_seats: 1,
+                   date: Date.new(2019, 11, 8), reservee: nil)
+        expect(r).not_to be_valid
+        expect(r.errors).to include(:reservee)
+    end
+
     context 'list' do
         it 'for a given date range' do
             today = Date.new(2019, 11, 8)
