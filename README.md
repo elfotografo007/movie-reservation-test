@@ -30,6 +30,16 @@ Run the migrations:
 sequel -m config/migrations/ $MV_DATABASE_URL
 ```
 
+Start the development server:
+```
+puma
+```
+
+## Making requests
+
+The default port is 9292. You can make requests hitting http://localhost:9292.
+Use your favorite requests client (curl, Postman, etc) to play with the application. 
+
 ## Deployment
 
 Set the following environment variables:
